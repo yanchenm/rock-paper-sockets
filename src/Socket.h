@@ -8,9 +8,9 @@
 #include "utils.h"
 
 class Socket {
-    int socket_fd;
+protected:
     sockaddr_in address;
-
+    int socket_fd;
 public:
     Socket();
     virtual ~Socket();
