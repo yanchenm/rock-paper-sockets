@@ -16,6 +16,7 @@ public:
     virtual ~Socket();
 
     void create();
+    void close();
     void send_move(Move m);
     void receive_move(Move &m);
     bool is_valid();

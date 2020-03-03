@@ -1,28 +1,50 @@
 #include <iostream>
+#include "Server.h"
+#include "Client.h"
 
 using namespace std;
 
+void server_loop(Server &s) {
+
+}
+
+void client_loop(Client &c) {
+
+}
+
 int main() {
-    for (;;) {
-        cout << "Options:\n";
-        cout << "[1] Host a new game.\n";
-        cout << "[2] Join an existing game.\n";
+    cout << "Options:\n";
+    cout << "[1] Host a new game.\n";
+    cout << "[2] Join an existing game.\n";
+    cout << "\nSelect an option: ";
 
-        int option;
-        cin >> option;
+    int option;
+    cin >> option;
 
-        if (option == 1) {
-            cout << "Starting host...\n";
-            // Some code
+    if (option == 1) {
+        Server listener;
+        while (true) {
+            cout << "Enter port to listen on: ";
 
-            break;
-        } else if (option == 2) {
-            cout << "Enter IP of host: ";
-            // Some code
+            int port;
+            cin >> port;
 
-            break;
-        } else {
-            cout << "Invalid input!";
+            cout << "Attempting to start host...\n";
+            try {
+                listener.create();
+                listener.bind(port);
+                listener.listen();
+
+                cout << "Server listening on port " << port << "\n";
+                break;
+            } catch (SocketException &e) {
+                cout << "Error: " << e.what() << "\n";
+            }
         }
+        server_loop(listener);
+    } else if (option == 2) {
+        Client client;
+    } else {
+        cout << "Invalid input!";
     }
 }

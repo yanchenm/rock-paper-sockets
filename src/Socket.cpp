@@ -3,9 +3,7 @@
 Socket::Socket() : socket_fd(-1), address{.sin_family=AF_INET} {};
 
 Socket::~Socket() {
-    if (is_valid()) {
-        close(socket_fd);
-    }
+    close();
 }
 
 void Socket::create() {
@@ -13,6 +11,12 @@ void Socket::create() {
 
     if (!is_valid()) {
         throw SocketException("Unable to create socket.");
+    }
+}
+
+void Socket::close() {
+    if (is_valid()) {
+        ::close(socket_fd);
     }
 }
 
