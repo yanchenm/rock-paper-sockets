@@ -39,6 +39,7 @@ int main() {
                 break;
             } catch (SocketException &e) {
                 cout << "Error: " << e.what() << "\n";
+                listener.close();
             }
         }
         server_loop(listener);

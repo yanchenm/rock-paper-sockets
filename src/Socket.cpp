@@ -39,6 +39,12 @@ void Socket::send_move(Move m) {
         case Move::ready:
             message = 'x';
             break;
+        case Move::winner:
+            message = 'w';
+            break;
+        case Move::loser:
+            message = 'l';
+            break;
     }
 
     if (send(socket_fd, &message, 1, 0) == -1) {
@@ -68,6 +74,12 @@ void Socket::receive_move(Move &m) {
             break;
         case 'x':
             m = Move::ready;
+            break;
+        case 'w':
+            m = Move::winner;
+            break;
+        case 'l':
+            m = Move::loser;
             break;
     }
 }

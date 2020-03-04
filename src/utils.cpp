@@ -6,6 +6,14 @@ bool operator<(Move &a, Move &b) {
         throw std::invalid_argument("Invalid move received.");
     }
 
+    if (a == Move::winner || b == Move::winner) {
+        throw std::invalid_argument("Invalid move received.");
+    }
+
+    if (a == Move::loser || b == Move::loser) {
+        throw std::invalid_argument("Invalid move received.");
+    }
+
     switch (a) {
         case Move::rock:
             return b == Move::paper;
@@ -20,6 +28,14 @@ bool operator<(Move &a, Move &b) {
 
 bool operator>(Move &a, Move &b) {
     if (a == Move::ready || b == Move::ready) {
+        throw std::invalid_argument("Invalid move received.");
+    }
+
+    if (a == Move::winner || b == Move::winner) {
+        throw std::invalid_argument("Invalid move received.");
+    }
+
+    if (a == Move::loser || b == Move::loser) {
         throw std::invalid_argument("Invalid move received.");
     }
 
