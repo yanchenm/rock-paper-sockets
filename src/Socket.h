@@ -17,8 +17,8 @@ public:
 
     void create();
     void close();
-    void send_move(Move m);
-    void receive_move(Move &m);
+    void send_move(utils::Move m);
+    void receive_move(utils::Move &m);
     bool is_valid();
 };
 
