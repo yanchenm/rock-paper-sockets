@@ -1,16 +1,9 @@
 #include <iostream>
 #include "Server.h"
 #include "Client.h"
+#include "server_logic.h"
 
 using namespace std;
-
-void server_loop(Server &s) {
-
-}
-
-void client_loop(Client &c) {
-
-}
 
 int main() {
     cout << "Options:\n";

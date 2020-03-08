@@ -20,66 +20,72 @@ void Socket::close() {
     }
 }
 
-void Socket::send_move(Move m) {
+void Socket::send_move(utils::Move m) {
     if (!is_valid()) {
         throw SocketException("There is no valid socket to send on.");
     }
 
     char message;
     switch (m) {
-        case Move::rock:
+        case utils::Move::rock:
             message = 'r';
             break;
-        case Move::paper:
+        case utils::Move::paper:
             message = 'p';
             break;
-        case Move::scissors:
+        case utils::Move::scissors:
             message = 's';
             break;
-        case Move::ready:
+        case utils::Move::ready:
             message = 'x';
             break;
-        case Move::winner:
+        case utils::Move::winner:
             message = 'w';
             break;
-        case Move::loser:
+        case utils::Move::loser:
             message = 'l';
+            break;
+        case utils::Move::tie:
+            message = 't';
             break;
     }
 
     if (send(socket_fd, &message, 1, 0) == -1) {
-        throw SocketException("Move send failed.");
+        throw SocketException("utils::Move send failed.");
     }
 }
 
-void Socket::receive_move(Move &m) {
+void Socket::receive_move(utils::Move &m) {
     if (!is_valid()) {
         throw SocketException("There is no valid socket to receive on.");
     }
 
     char message[1];
     if (recv(socket_fd, message, 1, 0) == -1) {
-        throw SocketException("Move receive failed.");
+        throw SocketException("utils::Move receive failed.");
     }
 
     switch (message[0]) {
         case 'r':
-            m = Move::rock;
+            m = utils::Move::rock;
             break;
         case 'p':
-            m = Move::paper;
+            m = utils::Move::paper;
             break;
         case 's':
-            m = Move::scissors;
+            m = utils::Move::scissors;
             break;
         case 'x':
-            m = Move::ready;
+            m = utils::Move::ready;
             break;
         case 'w':
-            m = Move::winner;
+            m = utils::Move::winner;
             break;
         case 'l':
-            m = Move::loser;
+            m = utils::Move::loser;
+            break;
+        case 't':
+            m = utils::Move::tie;
             break;
     }
 }
