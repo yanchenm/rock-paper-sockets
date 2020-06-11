@@ -38,6 +38,11 @@ int main() {
         server_loop(listener);
     } else if (option == 2) {
         Client client;
+        string roomID;
+        cout << "Enter your room ID: ";
+        cin >> roomID;
+
+
     } else {
         cout << "Invalid input!";
     }

@@ -3,21 +3,24 @@
 
 namespace utils {
     bool operator<(Move &a, Move &b) {
-        if (a == Move::ready || b == Move::ready) {
+        if (!utils::isValidMove(a) || !utils::isValidMove(b)) {
             throw std::invalid_argument("Invalid move for comparison");
         }
-
-        if (a == Move::winner || b == Move::winner) {
-            throw std::invalid_argument("Invalid move for comparison");
-        }
-
-        if (a == Move::loser || b == Move::loser) {
-            throw std::invalid_argument("Invalid move for comparison");
-        }
-
-        if (a == Move::tie || b == Move::tie) {
-            throw std::invalid_argument("Invalid move for comparison");
-        }
+//        if (a == Move::ready || b == Move::ready) {
+//            throw std::invalid_argument("Invalid move for comparison");
+//        }
+//
+//        if (a == Move::winner || b == Move::winner) {
+//            throw std::invalid_argument("Invalid move for comparison");
+//        }
+//
+//        if (a == Move::loser || b == Move::loser) {
+//            throw std::invalid_argument("Invalid move for comparison");
+//        }
+//
+//        if (a == Move::tie || b == Move::tie) {
+//            throw std::invalid_argument("Invalid move for comparison");
+//        }
 
         switch (a) {
             case Move::rock:
@@ -31,22 +34,26 @@ namespace utils {
         }
     }
 
+
     bool operator>(Move &a, Move &b) {
-        if (a == Move::ready || b == Move::ready) {
+        if (!utils::isValidMove(a) || !utils::isValidMove(b)) {
             throw std::invalid_argument("Invalid move for comparison");
         }
-
-        if (a == Move::winner || b == Move::winner) {
-            throw std::invalid_argument("Invalid move for comparison");
-        }
-
-        if (a == Move::loser || b == Move::loser) {
-            throw std::invalid_argument("Invalid move for comparison");
-        }
-
-        if (a == Move::tie || b == Move::tie) {
-            throw std::invalid_argument("Invalid move for comparison");
-        }
+//        if (a == Move::ready || b == Move::ready) {
+//            throw std::invalid_argument("Invalid move for comparison");
+//        }
+//
+//        if (a == Move::winner || b == Move::winner) {
+//            throw std::invalid_argument("Invalid move for comparison");
+//        }
+//
+//        if (a == Move::loser || b == Move::loser) {
+//            throw std::invalid_argument("Invalid move for comparison");
+//        }
+//
+//        if (a == Move::tie || b == Move::tie) {
+//            throw std::invalid_argument("Invalid move for comparison");
+//        }
 
         switch (a) {
             case Move::rock:
@@ -58,5 +65,10 @@ namespace utils {
             default:
                 throw std::invalid_argument("Invalid move for comparison");
         }
+    }
+
+    bool isValidMove(Move &a) {
+        bool isValid = a == Move::rock || a == Move::paper || a == Move::scissors ? true : false;
+        return isValid;
     }
 }
