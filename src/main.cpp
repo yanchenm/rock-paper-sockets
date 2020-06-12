@@ -42,15 +42,13 @@ int main() {
         } else if (option == 2) {
             Client client;
             while (true) {
-                string address_input;
-                cout << "Enter server address (including port): ";
-                cin >> address_input;
-
-                // Split server address and port
                 string server_address;
                 int server_port;
 
-                std::scanf(address_input.c_str(), "%s:%d", &server_address, &server_port);
+                cout << "Enter server address: ";
+                cin >> server_address;
+                cout << "Enter server port: ";
+                cin >> server_port;
 
                 cout << "Attempting to connect to server...\n";
                 try {
