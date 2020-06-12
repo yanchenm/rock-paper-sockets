@@ -21,9 +21,10 @@ void server_loop(Server &s) {
         utils::Move client_ready;
         try {
             server.receive_move(client_ready);
-            if (client_ready == utils::Move::ready) {
+            if (client_ready != utils::Move::ready) {
+                continue;
+            } else {
                 std::cout << "Client ready.\n";
-                break;
             }
         }
         catch (SocketException &e) {
