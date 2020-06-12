@@ -7,7 +7,7 @@ namespace utils {
     };
 
     bool operator<(const Move &a, const Move &b);
-    bool isValidMove(Move &move);
+    bool isValidMove(const Move &move);
     bool operator>(const Move &a, const Move &b);
 }
 

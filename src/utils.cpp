@@ -2,7 +2,7 @@
 #include "utils.h"
 
 namespace utils {
-    bool operator<(Move &a, Move &b) {
+    bool operator<(const Move &a, const Move &b) {
         if (!utils::isValidMove(a) || !utils::isValidMove(b)) {
             throw std::invalid_argument("Invalid move for comparison");
         }
@@ -20,7 +20,7 @@ namespace utils {
     }
 
 
-    bool operator>(Move &a, Move &b) {
+    bool operator>(const Move &a, const Move &b) {
         if (!utils::isValidMove(a) || !utils::isValidMove(b)) {
             throw std::invalid_argument("Invalid move for comparison");
         }
@@ -37,7 +37,7 @@ namespace utils {
         }
     }
 
-    bool isValidMove(Move &a) {
+    bool isValidMove(const Move &a) {
         bool isValid = a == Move::rock || a == Move::paper || a == Move::scissors;
         return isValid;
     }
