@@ -33,25 +33,7 @@ void server_loop(Server &s) {
         std::future<utils::Move> client_future = std::async(client_listener, std::ref(server));
         utils::Move server_move;
 
-        while (true) {
-            std::cout << "Make your move (rock, paper, scissors): ";
-
-            std::string input;
-            std::cin >> input;
-
-            if (input == "r" || input == "rock") {
-                server_move = utils::Move::rock;
-                break;
-            } else if (input == "p" || input == "paper") {
-                server_move = utils::Move::paper;
-                break;
-            } else if (input == "s" || input == "scissors") {
-                server_move = utils::Move::scissors;
-                break;
-            } else {
-                std::cout << "Please enter a valid move.\n";
-            }
-        }
+        server_move = utils::get_move_input();
 
         // Find winner
         utils::Move client_move = client_future.get();
@@ -87,6 +69,7 @@ void server_loop(Server &s) {
 
         if (!(input == "yes" || input == "y")) {
             std::cout << "Thanks for playing! Server terminating...\n";
+            server.close();
             return;
         }
     }

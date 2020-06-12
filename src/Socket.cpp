@@ -51,7 +51,7 @@ void Socket::send_move(utils::Move m) {
     }
 
     if (send(socket_fd, &message, 1, 0) == -1) {
-        throw SocketException("utils::Move send failed.");
+        throw SocketException("Move send failed.");
     }
 }
 
@@ -62,7 +62,7 @@ void Socket::receive_move(utils::Move &m) {
 
     char message[1];
     if (recv(socket_fd, message, 1, 0) == -1) {
-        throw SocketException("utils::Move receive failed.");
+        throw SocketException("Move receive failed.");
     }
 
     switch (message[0]) {

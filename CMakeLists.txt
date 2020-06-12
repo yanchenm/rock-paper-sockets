@@ -6,4 +6,4 @@ endif ()
 
 project(rock-paper-sockets)
 
-add_executable(rock-paper-sockets src/main.cpp src/utils.h src/utils.cpp src/Socket.cpp src/Socket.h src/SocketException.h src/Server.cpp src/Server.h src/Client.cpp src/Client.h src/server_logic.cpp src/server_logic.h)
+add_executable(rock-paper-sockets src/main.cpp src/utils.h src/utils.cpp src/Socket.cpp src/Socket.h src/SocketException.h src/Server.cpp src/Server.h src/Client.cpp src/Client.h src/server_logic.cpp src/server_logic.h src/client_logic.cpp src/client_logic.h)

@@ -16,5 +16,4 @@ public:
     }
 };
 
-
 #endif //ROCK_PAPER_SOCKETS_SOCKETEXCEPTION_H

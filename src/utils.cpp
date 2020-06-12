@@ -1,9 +1,10 @@
 #include <stdexcept>
+#include <iostream>
 #include "utils.h"
 
 namespace utils {
     bool operator<(const Move &a, const Move &b) {
-        if (!utils::isValidMove(a) || !utils::isValidMove(b)) {
+        if (!utils::is_valid_move(a) || !utils::is_valid_move(b)) {
             throw std::invalid_argument("Invalid move for comparison");
         }
 
@@ -21,7 +22,7 @@ namespace utils {
 
 
     bool operator>(const Move &a, const Move &b) {
-        if (!utils::isValidMove(a) || !utils::isValidMove(b)) {
+        if (!utils::is_valid_move(a) || !utils::is_valid_move(b)) {
             throw std::invalid_argument("Invalid move for comparison");
         }
 
@@ -37,8 +38,31 @@ namespace utils {
         }
     }
 
-    bool isValidMove(const Move &a) {
+    bool is_valid_move(const Move &a) {
         bool isValid = a == Move::rock || a == Move::paper || a == Move::scissors;
         return isValid;
+    }
+
+    Move get_move_input() {
+        while (true) {
+            std::cout << "Make your move (rock, paper, scissors): ";
+
+            std::string input;
+            std::cin >> input;
+
+            if (input == "r" || input == "rock") {
+                return Move::rock;
+            }
+
+            if (input == "p" || input == "paper") {
+                return Move::paper;
+            }
+
+            if (input == "s" || input == "scissors") {
+                return Move::scissors;
+            }
+
+            std::cout << "Please enter a valid move.\n";
+        }
     }
 }

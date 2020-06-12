@@ -1,0 +1,9 @@
+#ifndef ROCK_PAPER_SOCKETS_CLIENT_LOGIC_H
+#define ROCK_PAPER_SOCKETS_CLIENT_LOGIC_H
+
+#include "Client.h"
+#include "utils.h"
+
+void client_loop(Client &c);
+
+#endif //ROCK_PAPER_SOCKETS_CLIENT_LOGIC_H

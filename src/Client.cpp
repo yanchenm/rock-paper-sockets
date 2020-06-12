@@ -2,7 +2,7 @@
 
 void Client::connect(const std::string &address, int port) {
     if (!is_valid()) {
-        throw SocketException("No port on connect on.");
+        throw SocketException("No socket to connect on.");
     }
 
     sockaddr_in server{.sin_family=AF_INET, .sin_port=htons(port)};

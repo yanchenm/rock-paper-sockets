@@ -7,8 +7,9 @@ namespace utils {
     };
 
     bool operator<(const Move &a, const Move &b);
-    bool isValidMove(const Move &move);
+    bool is_valid_move(const Move &move);
     bool operator>(const Move &a, const Move &b);
+    Move get_move_input();
 }
 
 #endif //ROCK_PAPER_SOCKETS_UTILS_H
