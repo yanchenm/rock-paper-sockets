@@ -8,7 +8,7 @@ void server_loop(Server &s) {
     try {
         std::cout << "Waiting for client to connect...\n";
         s.accept(server);
-        std::cout << "Client connected.\n"
+        std::cout << "Client connected.\n";
     }
     catch (SocketException &e) {
         std::cout << "Error: " << e.what() << "\n";
@@ -93,12 +93,14 @@ void server_loop(Server &s) {
 }
 
 utils::Move client_listener(Server &s) {
-    try {
-        utils::Move m;
-        s.receive_move(m);
-        return m;
-    }
-    catch (SocketException &e) {
-        std::cout << "Error: " << e.what() << "\n";
+    while (true) {
+        try {
+            utils::Move m;
+            s.receive_move(m);
+            return m;
+        }
+        catch (SocketException &e) {
+            std::cout << "Error: " << e.what() << "\n";
+        }
     }
 }

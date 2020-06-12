@@ -1,7 +1,7 @@
 #ifndef ROCK_PAPER_SOCKETS_SERVER_H
 #define ROCK_PAPER_SOCKETS_SERVER_H
 
-#import "Socket.h"
+#include "Socket.h"
 
 class Server : public Socket {
 public:
