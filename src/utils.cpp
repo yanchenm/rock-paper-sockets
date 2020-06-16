@@ -45,7 +45,7 @@ namespace utils {
 
     Move get_move_input() {
         while (true) {
-            std::cout << "Make your move (rock, paper, scissors): ";
+            std::cout << "Make your move (rock [r], paper [p], scissors [s]): ";
 
             std::string input;
             std::cin >> input;

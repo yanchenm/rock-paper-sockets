@@ -27,6 +27,8 @@ void client_loop(Client &c) {
             }
         } catch (SocketException &e) {
             std::cout << "Error: " << e.what() << "\n";
+            c.close();
+            return;
         }
 
         std::cout << "Play again? ";

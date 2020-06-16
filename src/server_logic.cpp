@@ -20,6 +20,7 @@ void server_loop(Server &s) {
         // Wait until client sends ready signal
         utils::Move client_ready;
         try {
+            std::cout << "Receiving move\n";
             server.receive_move(client_ready);
             if (client_ready != utils::Move::ready) {
                 continue;
@@ -29,6 +30,8 @@ void server_loop(Server &s) {
         }
         catch (SocketException &e) {
             std::cout << "Error: " << e.what() << "\n";
+            server.close();
+            return;
         }
 
         std::future<utils::Move> client_future = std::async(client_listener, std::ref(server));

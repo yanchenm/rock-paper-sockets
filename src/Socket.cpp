@@ -61,8 +61,12 @@ void Socket::receive_move(utils::Move &m) {
     }
 
     char message[1];
-    if (recv(socket_fd, message, 1, 0) == -1) {
+    int ret = recv(socket_fd, message, 1, 0);
+    if (ret == -1) {
         throw SocketException("Move receive failed.");
+    }
+    else if (ret == 0) {
+        throw SocketException("Connection was terminated.");
     }
 
     switch (message[0]) {
