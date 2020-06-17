@@ -4,7 +4,11 @@
 #include "Socket.h"
 
 class Server : public Socket {
+protected:
+    sockaddr_in address;
 public:
+    Server();
+
     void bind(int port);
     void listen();
     void accept(Server &s);

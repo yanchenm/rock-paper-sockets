@@ -9,7 +9,6 @@
 
 class Socket {
 protected:
-    sockaddr_in address;
     int socket_fd;
 public:
     Socket();

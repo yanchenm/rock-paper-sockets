@@ -1,5 +1,7 @@
 #include "Server.h"
 
+Server::Server() : Socket(), address{.sin_family=AF_INET} {}
+
 void Server::bind(int port) {
     if (!is_valid()) {
         throw SocketException("No socket to bind.");

@@ -1,6 +1,6 @@
 #include "Socket.h"
 
-Socket::Socket() : socket_fd(-1), address{.sin_family=AF_INET} {};
+Socket::Socket() : socket_fd(-1) {};
 
 Socket::~Socket() {
     close();
@@ -64,8 +64,7 @@ void Socket::receive_move(utils::Move &m) {
     int ret = recv(socket_fd, message, 1, 0);
     if (ret == -1) {
         throw SocketException("Move receive failed.");
-    }
-    else if (ret == 0) {
+    } else if (ret == 0) {
         throw SocketException("Connection was terminated.");
     }
 
