@@ -5,6 +5,8 @@ if (${CMAKE_VERSION} VERSION_LESS 3.12)
 endif ()
 
 set (CMAKE_CXX_STANDARD 11)
+set (GCC_THREAD_LINK_FLAG "-pthread")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_THREAD_LINK_FLAG}")
 project(rock-paper-sockets)
 
-add_executable(rock-paper-sockets src/main.cpp src/utils.h src/utils.cpp src/Socket.cpp src/Socket.h src/SocketException.h src/Server.cpp src/Server.h src/Client.cpp src/Client.h src/server_logic.cpp src/server_logic.h src/client_logic.cpp src/client_logic.h)
+add_executable(rock-paper-sockets src/main.cpp src/utils.h src/utils.cpp src/socket.cpp src/socket.h src/socket_exception.h src/server.cpp src/server.h src/client.cpp src/client.h src/server_logic.cpp src/server_logic.h src/client_logic.cpp src/client_logic.h)
