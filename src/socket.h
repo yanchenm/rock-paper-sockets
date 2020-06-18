@@ -7,12 +7,12 @@
 #include "socket_exception.h"
 #include "utils.h"
 
-class socket {
+class Socket {
 protected:
     int socket_fd;
 public:
-    socket();
-    virtual ~socket();
+    Socket();
+    virtual ~Socket();
 
     void create();
     void close();

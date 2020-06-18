@@ -18,7 +18,7 @@ int main() {
         cin >> option;
 
         if (option == 1) {
-            server listener;
+            Server listener;
             while (true) {
                 cout << "Enter port to listen on: ";
 
@@ -33,14 +33,14 @@ int main() {
 
                     cout << "Server listening on port " << port << "\n";
                     break;
-                } catch (socket_exception &e) {
+                } catch (SocketException &e) {
                     cout << "Error: " << e.what() << "\n";
                     listener.close();
                 }
             }
             server_loop(listener);
         } else if (option == 2) {
-            client client;
+            Client client;
             while (true) {
                 string server_address;
                 int server_port;
@@ -57,7 +57,7 @@ int main() {
 
                     cout << "Connected to server.\n";
                     break;
-                } catch (socket_exception &e) {
+                } catch (SocketException &e) {
                     cout << "Error: " << e.what() << "\n";
                     client.close();
                 }

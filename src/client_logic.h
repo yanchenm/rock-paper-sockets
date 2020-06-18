@@ -4,6 +4,6 @@
 #include "client.h"
 #include "utils.h"
 
-void client_loop(client &c);
+void client_loop(Client &c);
 
 #endif //ROCK_PAPER_SOCKETS_CLIENT_LOGIC_H

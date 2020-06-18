@@ -3,15 +3,15 @@
 
 #include "socket.h"
 
-class server : public socket {
-protected:
+class Server : public Socket {
+private:
     sockaddr_in address;
 public:
-    server();
+    Server();
 
     void bind(int port);
     void listen();
-    void accept(server &s);
+    void accept(Server &s);
 };
 
 

@@ -3,14 +3,14 @@
 #include <future>
 #include "server_logic.h"
 
-void server_loop(server &listener) {
-    server s;
+void server_loop(Server &listener) {
+    Server s;
     try {
         std::cout << "Waiting for client to connect...\n";
         listener.accept(s);
         std::cout << "Client connected.\n";
     }
-    catch (socket_exception &e) {
+    catch (SocketException &e) {
         std::cout << "Error: " << e.what() << "\n";
         s.close();
         return;
@@ -28,7 +28,7 @@ void server_loop(server &listener) {
                 std::cout << "Client ready.\n";
             }
         }
-        catch (socket_exception &e) {
+        catch (SocketException &e) {
             std::cout << "Error: " << e.what() << "\n";
             s.close();
             return;
@@ -46,7 +46,7 @@ void server_loop(server &listener) {
             try {
                 s.send_move(utils::Move::winner);
             }
-            catch (socket_exception &e) {
+            catch (SocketException &e) {
                 std::cout << "Error: " << e.what() << "\n";
             }
         } else if (server_move == client_move) {
@@ -54,7 +54,7 @@ void server_loop(server &listener) {
             try {
                 s.send_move(utils::Move::tie);
             }
-            catch (socket_exception &e) {
+            catch (SocketException &e) {
                 std::cout << "Error: " << e.what() << "\n";
             }
         } else {
@@ -62,7 +62,7 @@ void server_loop(server &listener) {
             try {
                 s.send_move(utils::Move::loser);
             }
-            catch (socket_exception &e) {
+            catch (SocketException &e) {
                 std::cout << "Error: " << e.what() << "\n";
             }
         }
@@ -79,14 +79,14 @@ void server_loop(server &listener) {
     }
 }
 
-utils::Move client_listener(server &s) {
+utils::Move client_listener(Server &s) {
     while (true) {
         try {
             utils::Move m;
             s.receive_move(m);
             return m;
         }
-        catch (socket_exception &e) {
+        catch (SocketException &e) {
             std::cout << "Error: " << e.what() << "\n";
         }
     }

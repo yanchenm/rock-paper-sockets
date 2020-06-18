@@ -1,7 +1,7 @@
 #include <iostream>
 #include "client_logic.h"
 
-void client_loop(client &c) {
+void client_loop(Client &c) {
     while (true) {
         try {
             c.send_move(utils::Move::ready);
@@ -25,7 +25,7 @@ void client_loop(client &c) {
                 default:
                     throw std::runtime_error("Invalid result received.");
             }
-        } catch (socket_exception &e) {
+        } catch (SocketException &e) {
             std::cout << "Error: " << e.what() << "\n";
             c.close();
             return;
