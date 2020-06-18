@@ -1,28 +1,28 @@
-#include "Socket.h"
+#include "socket.h"
 
-Socket::Socket() : socket_fd(-1) {};
+socket::socket() : socket_fd(-1) {};
 
-Socket::~Socket() {
+socket::~socket() {
     close();
 }
 
-void Socket::create() {
-    socket_fd = socket(AF_INET, SOCK_STREAM, 0);
+void socket::create() {
+    socket_fd = ::socket(AF_INET, SOCK_STREAM, 0);
 
     if (!is_valid()) {
-        throw SocketException("Unable to create socket.");
+        throw socket_exception("Unable to create socket.");
     }
 }
 
-void Socket::close() {
+void socket::close() {
     if (is_valid()) {
         ::close(socket_fd);
     }
 }
 
-void Socket::send_move(utils::Move m) {
+void socket::send_move(utils::Move m) const {
     if (!is_valid()) {
-        throw SocketException("There is no valid socket to send on.");
+        throw socket_exception("There is no valid socket to send on.");
     }
 
     char message;
@@ -51,21 +51,21 @@ void Socket::send_move(utils::Move m) {
     }
 
     if (send(socket_fd, &message, 1, 0) == -1) {
-        throw SocketException("Move send failed.");
+        throw socket_exception("Move send failed.");
     }
 }
 
-void Socket::receive_move(utils::Move &m) {
+void socket::receive_move(utils::Move &m) const {
     if (!is_valid()) {
-        throw SocketException("There is no valid socket to receive on.");
+        throw socket_exception("There is no valid socket to receive on.");
     }
 
     char message[1];
     int ret = recv(socket_fd, message, 1, 0);
     if (ret == -1) {
-        throw SocketException("Move receive failed.");
+        throw socket_exception("Move receive failed.");
     } else if (ret == 0) {
-        throw SocketException("Connection was terminated.");
+        throw socket_exception("Connection was terminated.");
     }
 
     switch (message[0]) {
@@ -93,6 +93,6 @@ void Socket::receive_move(utils::Move &m) {
     }
 }
 
-bool Socket::is_valid() {
+bool socket::is_valid() const {
     return socket_fd != -1;
 }

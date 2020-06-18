@@ -1,17 +1,17 @@
 #ifndef ROCK_PAPER_SOCKETS_SERVER_H
 #define ROCK_PAPER_SOCKETS_SERVER_H
 
-#include "Socket.h"
+#include "socket.h"
 
-class Server : public Socket {
+class server : public socket {
 protected:
     sockaddr_in address;
 public:
-    Server();
+    server();
 
     void bind(int port);
     void listen();
-    void accept(Server &s);
+    void accept(server &s);
 };
 
 

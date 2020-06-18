@@ -2,9 +2,9 @@
 #define ROCK_PAPER_SOCKETS_CLIENT_H
 
 #include <arpa/inet.h>
-#include "Socket.h"
+#include "socket.h"
 
-class Client : public Socket {
+class client : public socket {
 public:
     void connect(const std::string &address, int port);
 };

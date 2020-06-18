@@ -4,21 +4,21 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include "SocketException.h"
+#include "socket_exception.h"
 #include "utils.h"
 
-class Socket {
+class socket {
 protected:
     int socket_fd;
 public:
-    Socket();
-    virtual ~Socket();
+    socket();
+    virtual ~socket();
 
     void create();
     void close();
-    void send_move(utils::Move m);
-    void receive_move(utils::Move &m);
-    bool is_valid();
+    void send_move(utils::Move m) const;
+    void receive_move(utils::Move &m) const;
+    bool is_valid() const;
 };
 
 

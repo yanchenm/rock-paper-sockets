@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Server.h"
-#include "Client.h"
+#include "server.h"
+#include "client.h"
 #include "server_logic.h"
 #include "client_logic.h"
 
@@ -18,7 +18,7 @@ int main() {
         cin >> option;
 
         if (option == 1) {
-            Server listener;
+            server listener;
             while (true) {
                 cout << "Enter port to listen on: ";
 
@@ -33,14 +33,14 @@ int main() {
 
                     cout << "Server listening on port " << port << "\n";
                     break;
-                } catch (SocketException &e) {
+                } catch (socket_exception &e) {
                     cout << "Error: " << e.what() << "\n";
                     listener.close();
                 }
             }
             server_loop(listener);
         } else if (option == 2) {
-            Client client;
+            client client;
             while (true) {
                 string server_address;
                 int server_port;
@@ -57,7 +57,7 @@ int main() {
 
                     cout << "Connected to server.\n";
                     break;
-                } catch (SocketException &e) {
+                } catch (socket_exception &e) {
                     cout << "Error: " << e.what() << "\n";
                     client.close();
                 }

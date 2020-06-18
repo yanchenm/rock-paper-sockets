@@ -3,16 +3,16 @@
 #include <future>
 #include "server_logic.h"
 
-void server_loop(Server &s) {
-    Server server;
+void server_loop(server &listener) {
+    server s;
     try {
         std::cout << "Waiting for client to connect...\n";
-        s.accept(server);
+        listener.accept(s);
         std::cout << "Client connected.\n";
     }
-    catch (SocketException &e) {
+    catch (socket_exception &e) {
         std::cout << "Error: " << e.what() << "\n";
-        server.close();
+        s.close();
         return;
     }
 
@@ -21,20 +21,20 @@ void server_loop(Server &s) {
         utils::Move client_ready;
         try {
             std::cout << "Receiving move\n";
-            server.receive_move(client_ready);
+            s.receive_move(client_ready);
             if (client_ready != utils::Move::ready) {
                 continue;
             } else {
                 std::cout << "Client ready.\n";
             }
         }
-        catch (SocketException &e) {
+        catch (socket_exception &e) {
             std::cout << "Error: " << e.what() << "\n";
-            server.close();
+            s.close();
             return;
         }
 
-        std::future<utils::Move> client_future = std::async(client_listener, std::ref(server));
+        std::future<utils::Move> client_future = std::async(client_listener, std::ref(s));
         utils::Move server_move;
 
         server_move = utils::get_move_input();
@@ -44,25 +44,25 @@ void server_loop(Server &s) {
         if (utils::operator<(server_move, client_move)) {
             std::cout << "You lost!\n";
             try {
-                server.send_move(utils::Move::winner);
+                s.send_move(utils::Move::winner);
             }
-            catch (SocketException &e) {
+            catch (socket_exception &e) {
                 std::cout << "Error: " << e.what() << "\n";
             }
         } else if (server_move == client_move) {
             std::cout << "It's a tie!\n";
             try {
-                server.send_move(utils::Move::tie);
+                s.send_move(utils::Move::tie);
             }
-            catch (SocketException &e) {
+            catch (socket_exception &e) {
                 std::cout << "Error: " << e.what() << "\n";
             }
         } else {
             std::cout << "You won!\n";
             try {
-                server.send_move(utils::Move::loser);
+                s.send_move(utils::Move::loser);
             }
-            catch (SocketException &e) {
+            catch (socket_exception &e) {
                 std::cout << "Error: " << e.what() << "\n";
             }
         }
@@ -73,20 +73,20 @@ void server_loop(Server &s) {
 
         if (!(input == "yes" || input == "y")) {
             std::cout << "Thanks for playing! Server terminating...\n";
-            server.close();
+            s.close();
             return;
         }
     }
 }
 
-utils::Move client_listener(Server &s) {
+utils::Move client_listener(server &s) {
     while (true) {
         try {
             utils::Move m;
             s.receive_move(m);
             return m;
         }
-        catch (SocketException &e) {
+        catch (socket_exception &e) {
             std::cout << "Error: " << e.what() << "\n";
         }
     }
