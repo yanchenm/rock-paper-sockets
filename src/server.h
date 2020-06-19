@@ -3,7 +3,7 @@
 
 #include "socket.h"
 
-class Server : public Socket {
+class Server : public SocketInterface {
 private:
     sockaddr_in address;
 public:
@@ -11,7 +11,7 @@ public:
 
     void bind(int port);
     void listen();
-    void accept(Server &s);
+    void accept(SocketInterface &s);
 };
 
 

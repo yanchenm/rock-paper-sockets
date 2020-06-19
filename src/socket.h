@@ -7,14 +7,15 @@
 #include "socket_exception.h"
 #include "utils.h"
 
-class Socket {
+class SocketInterface {
 protected:
     int socket_fd;
 public:
-    Socket();
-    virtual ~Socket();
+    SocketInterface();
+    virtual ~SocketInterface();
 
     void create();
+    void assign(int new_socket);
     void close();
     void send_move(utils::Move m) const;
     void receive_move(utils::Move &m) const;

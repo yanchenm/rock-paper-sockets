@@ -1,12 +1,12 @@
 #include "socket.h"
 
-Socket::Socket() : socket_fd(-1) {};
+SocketInterface::SocketInterface() : socket_fd(-1) {};
 
-Socket::~Socket() {
+SocketInterface::~SocketInterface() {
     close();
 }
 
-void Socket::create() {
+void SocketInterface::create() {
     socket_fd = socket(AF_INET, SOCK_STREAM, 0);
 
     if (!is_valid()) {
@@ -14,13 +14,17 @@ void Socket::create() {
     }
 }
 
-void Socket::close() {
+void SocketInterface::assign(int new_socket) {
+    socket_fd = new_socket;
+}
+
+void SocketInterface::close() {
     if (is_valid()) {
         ::close(socket_fd);
     }
 }
 
-void Socket::send_move(utils::Move m) const {
+void SocketInterface::send_move(utils::Move m) const {
     if (!is_valid()) {
         throw SocketException("There is no valid socket to send on.");
     }
@@ -55,7 +59,7 @@ void Socket::send_move(utils::Move m) const {
     }
 }
 
-void Socket::receive_move(utils::Move &m) const {
+void SocketInterface::receive_move(utils::Move &m) const {
     if (!is_valid()) {
         throw SocketException("There is no valid socket to receive on.");
     }
@@ -93,6 +97,6 @@ void Socket::receive_move(utils::Move &m) const {
     }
 }
 
-bool Socket::is_valid() const {
+bool SocketInterface::is_valid() const {
     return socket_fd != -1;
 }

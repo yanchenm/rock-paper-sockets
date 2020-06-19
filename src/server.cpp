@@ -1,6 +1,6 @@
 #include "server.h"
 
-Server::Server() : Socket(), address{.sin_family=AF_INET} {}
+Server::Server() : SocketInterface(), address{.sin_family=AF_INET} {}
 
 void Server::bind(int port) {
     if (!is_valid()) {
@@ -25,11 +25,11 @@ void Server::listen() {
     }
 }
 
-void Server::accept(Server &s) {
+void Server::accept(SocketInterface &s) {
     int addr_size = sizeof(address);
-    s.socket_fd = ::accept(socket_fd, (sockaddr *) &address, (socklen_t *) &addr_size);
+    s.assign(::accept(socket_fd, (sockaddr *) &address, (socklen_t *) &addr_size));
 
-    if (s.socket_fd == -1) {
+    if (!s.is_valid()) {
         throw SocketException("Failed to accept connection.");
     }
 }

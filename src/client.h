@@ -4,7 +4,7 @@
 #include <arpa/inet.h>
 #include "socket.h"
 
-class Client : public Socket {
+class Client : public SocketInterface {
 public:
     void connect(const std::string &address, int port);
 };
